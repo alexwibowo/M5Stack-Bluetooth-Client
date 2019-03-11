@@ -1,0 +1,3 @@
+[submodule "ESP32 Bluetooth/Core/Extensions"]
+	path = ESP32 Bluetooth/Core/Extensions
+	url = https://github.com/macward/ios-extensions.git
