@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		4D4D2E14F4AF66BF40AE8AE3 /* Pods_ESP32_Bluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7B6E4BCEC14C075BEBD1F1 /* Pods_ESP32_Bluetooth.framework */; };
 		ED0731AF2232E87D00A1380A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0731AE2232E87D00A1380A /* AppDelegate.swift */; };
-		ED0731B12232E87D00A1380A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0731B02232E87D00A1380A /* ViewController.swift */; };
+		ED0731B12232E87D00A1380A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0731B02232E87D00A1380A /* HomeViewController.swift */; };
 		ED0731B42232E87D00A1380A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED0731B22232E87D00A1380A /* Main.storyboard */; };
 		ED0731B62232E87F00A1380A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED0731B52232E87F00A1380A /* Assets.xcassets */; };
 		ED0731B92232E87F00A1380A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED0731B72232E87F00A1380A /* LaunchScreen.storyboard */; };
@@ -41,9 +41,13 @@
 		ED0731FE2232EA8300A1380A /* DiscoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0731FD2232EA8300A1380A /* DiscoverViewModel.swift */; };
 		ED0732002232EC2000A1380A /* BLEService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0731FF2232EC2000A1380A /* BLEService.swift */; };
 		ED0732022232EC4600A1380A /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED0732012232EC4600A1380A /* CoreBluetooth.framework */; };
-		ED89667C22357E32005A2608 /* PeripheralService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED89667B22357E32005A2608 /* PeripheralService.swift */; };
+		ED41F558223AE56900BED62C /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED41F557223AE56900BED62C /* Storyboard.swift */; };
+		ED41F55A223B5A9100BED62C /* PeripheralInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED41F559223B5A9100BED62C /* PeripheralInfo.swift */; };
+		ED89667C22357E32005A2608 /* BLEDeviceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED89667B22357E32005A2608 /* BLEDeviceService.swift */; };
 		EDAA778B2236167400A869BB /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAA778A2236167400A869BB /* LocalStorage.swift */; };
 		EDB7901D2236DFC000B57F43 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB7901C2236DFC000B57F43 /* Device.swift */; };
+		EDB790212236F77A00B57F43 /* BLEDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB790202236F77A00B57F43 /* BLEDeviceManager.swift */; };
+		EDB790252236F8C500B57F43 /* DeviceDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB790242236F8C500B57F43 /* DeviceDetailsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,7 +56,7 @@
 		DC68230FB91B4EE9F570E14D /* Pods-ESP32 Bluetooth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESP32 Bluetooth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ESP32 Bluetooth/Pods-ESP32 Bluetooth.debug.xcconfig"; sourceTree = "<group>"; };
 		ED0731AB2232E87D00A1380A /* ESP32 Bluetooth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ESP32 Bluetooth.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED0731AE2232E87D00A1380A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		ED0731B02232E87D00A1380A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		ED0731B02232E87D00A1380A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		ED0731B32232E87D00A1380A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ED0731B52232E87F00A1380A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED0731B82232E87F00A1380A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -85,9 +89,13 @@
 		ED0731FD2232EA8300A1380A /* DiscoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewModel.swift; sourceTree = "<group>"; };
 		ED0731FF2232EC2000A1380A /* BLEService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEService.swift; sourceTree = "<group>"; };
 		ED0732012232EC4600A1380A /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
-		ED89667B22357E32005A2608 /* PeripheralService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralService.swift; sourceTree = "<group>"; };
+		ED41F557223AE56900BED62C /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
+		ED41F559223B5A9100BED62C /* PeripheralInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralInfo.swift; sourceTree = "<group>"; };
+		ED89667B22357E32005A2608 /* BLEDeviceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceService.swift; sourceTree = "<group>"; };
 		EDAA778A2236167400A869BB /* LocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
 		EDB7901C2236DFC000B57F43 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		EDB790202236F77A00B57F43 /* BLEDeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceManager.swift; sourceTree = "<group>"; };
+		EDB790242236F8C500B57F43 /* DeviceDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,7 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				ED0731FF2232EC2000A1380A /* BLEService.swift */,
-				ED89667B22357E32005A2608 /* PeripheralService.swift */,
+				ED89667B22357E32005A2608 /* BLEDeviceService.swift */,
 				EDAA778A2236167400A869BB /* LocalStorage.swift */,
 			);
 			path = Services;
@@ -159,8 +167,9 @@
 		ED0731C12232E8E000A1380A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				ED0731B02232E87D00A1380A /* ViewController.swift */,
+				ED0731B02232E87D00A1380A /* HomeViewController.swift */,
 				ED0731FB2232EA5D00A1380A /* DiscoverTableViewController.swift */,
+				EDB790242236F8C500B57F43 /* DeviceDetailsTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -168,6 +177,8 @@
 		ED0731C22232E9E600A1380A /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				ED41F555223AE53300BED62C /* App */,
+				EDB7901E2236F75100B57F43 /* Managers */,
 				ED0731C02232E8D600A1380A /* Services */,
 				ED0731C32232E9E600A1380A /* Extensions */,
 			);
@@ -245,12 +256,37 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
+		ED41F555223AE53300BED62C /* App */ = {
+			isa = PBXGroup;
+			children = (
+				ED41F556223AE54E00BED62C /* Extensions */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		ED41F556223AE54E00BED62C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				ED41F557223AE56900BED62C /* Storyboard.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		EDB7901B2236DFA900B57F43 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				EDB7901C2236DFC000B57F43 /* Device.swift */,
+				ED41F559223B5A9100BED62C /* PeripheralInfo.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		EDB7901E2236F75100B57F43 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				EDB790202236F77A00B57F43 /* BLEDeviceManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		F3234C6E4E62A38DD269A3ED /* Frameworks */ = {
@@ -387,8 +423,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDB7901D2236DFC000B57F43 /* Device.swift in Sources */,
-				ED0731B12232E87D00A1380A /* ViewController.swift in Sources */,
-				ED89667C22357E32005A2608 /* PeripheralService.swift in Sources */,
+				ED0731B12232E87D00A1380A /* HomeViewController.swift in Sources */,
+				ED89667C22357E32005A2608 /* BLEDeviceService.swift in Sources */,
 				ED0731FE2232EA8300A1380A /* DiscoverViewModel.swift in Sources */,
 				ED0731F62232E9E600A1380A /* Bundle.swift in Sources */,
 				ED0731EB2232E9E600A1380A /* UIImageView.swift in Sources */,
@@ -396,6 +432,7 @@
 				ED0731E02232E9E600A1380A /* CALayer.swift in Sources */,
 				ED0731EF2232E9E600A1380A /* UINavigationController.swift in Sources */,
 				ED0731E42232E9E600A1380A /* ViewController+Accessibility.swift in Sources */,
+				EDB790252236F8C500B57F43 /* DeviceDetailsTableViewController.swift in Sources */,
 				ED0731F42232E9E600A1380A /* Integer.swift in Sources */,
 				ED0731E12232E9E600A1380A /* UIVIew.swift in Sources */,
 				ED0731ED2232E9E600A1380A /* UIScreen.swift in Sources */,
@@ -407,6 +444,7 @@
 				ED0731F02232E9E600A1380A /* CAGradientLayer.swift in Sources */,
 				ED0731FC2232EA5D00A1380A /* DiscoverTableViewController.swift in Sources */,
 				ED0731EC2232E9E600A1380A /* UIView+Nib.swift in Sources */,
+				EDB790212236F77A00B57F43 /* BLEDeviceManager.swift in Sources */,
 				ED0731F32232E9E600A1380A /* Data.swift in Sources */,
 				ED0731EA2232E9E600A1380A /* UIScrollView+Extension.swift in Sources */,
 				ED0731E92232E9E600A1380A /* RadioButton.swift in Sources */,
@@ -415,9 +453,11 @@
 				ED0731E72232E9E600A1380A /* UITableView.swift in Sources */,
 				ED0731E52232E9E600A1380A /* UIViewController+Alerts.swift in Sources */,
 				ED0731F52232E9E600A1380A /* Dictionary.swift in Sources */,
+				ED41F558223AE56900BED62C /* Storyboard.swift in Sources */,
 				ED0731F22232E9E600A1380A /* UIColor+extension.swift in Sources */,
 				ED0731E62232E9E600A1380A /* NSMutableAttributedString.swift in Sources */,
 				ED0731FA2232EA1F00A1380A /* Constants.swift in Sources */,
+				ED41F55A223B5A9100BED62C /* PeripheralInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
