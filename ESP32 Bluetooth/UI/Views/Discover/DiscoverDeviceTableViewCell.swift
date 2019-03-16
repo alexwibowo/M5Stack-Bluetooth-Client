@@ -26,9 +26,9 @@ class DiscoverDeviceTableViewCell: UITableViewCell {
         labelRssi.text = ""
     }
     
-    func configure(peripheralData: Device) {
-        labelPeripheralName.text = peripheralData.peripheral.name ?? "UNKNOWN"
-        labelRssi.text = "\(peripheralData.RSSI)"
+    func configure(withDevice device: Device) {
+        labelPeripheralName.text = device.peripheral.name ?? "UNKNOWN"
+        labelRssi.text = "\(device.rssi)"
     }
     
 }

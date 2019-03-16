@@ -39,11 +39,11 @@
 		ED0731FA2232EA1F00A1380A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0731F92232EA1F00A1380A /* Constants.swift */; };
 		ED0731FC2232EA5D00A1380A /* DiscoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0731FB2232EA5D00A1380A /* DiscoverTableViewController.swift */; };
 		ED0731FE2232EA8300A1380A /* DiscoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0731FD2232EA8300A1380A /* DiscoverViewModel.swift */; };
-		ED0732002232EC2000A1380A /* BLEService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0731FF2232EC2000A1380A /* BLEService.swift */; };
 		ED0732022232EC4600A1380A /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED0732012232EC4600A1380A /* CoreBluetooth.framework */; };
 		ED3031E2223CB24B00B49F78 /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3031E1223CB24B00B49F78 /* BLEManager.swift */; };
+		ED3031E4223CC17900B49F78 /* BLEDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3031E3223CC17900B49F78 /* BLEDelegate.swift */; };
 		ED41F558223AE56900BED62C /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED41F557223AE56900BED62C /* Storyboard.swift */; };
-		ED41F55A223B5A9100BED62C /* PeripheralInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED41F559223B5A9100BED62C /* PeripheralInfo.swift */; };
+		ED41F55A223B5A9100BED62C /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED41F559223B5A9100BED62C /* Device.swift */; };
 		ED41F560223C25C800BED62C /* DiscoverDeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED41F55E223C25C800BED62C /* DiscoverDeviceTableViewCell.swift */; };
 		ED41F561223C25C800BED62C /* DiscoverDeviceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED41F55F223C25C800BED62C /* DiscoverDeviceTableViewCell.xib */; };
 		ED89667C22357E32005A2608 /* BLEDeviceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED89667B22357E32005A2608 /* BLEDeviceService.swift */; };
@@ -88,11 +88,11 @@
 		ED0731F92232EA1F00A1380A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ED0731FB2232EA5D00A1380A /* DiscoverTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewController.swift; sourceTree = "<group>"; };
 		ED0731FD2232EA8300A1380A /* DiscoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewModel.swift; sourceTree = "<group>"; };
-		ED0731FF2232EC2000A1380A /* BLEService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEService.swift; sourceTree = "<group>"; };
 		ED0732012232EC4600A1380A /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		ED3031E1223CB24B00B49F78 /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
+		ED3031E3223CC17900B49F78 /* BLEDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDelegate.swift; sourceTree = "<group>"; };
 		ED41F557223AE56900BED62C /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
-		ED41F559223B5A9100BED62C /* PeripheralInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralInfo.swift; sourceTree = "<group>"; };
+		ED41F559223B5A9100BED62C /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		ED41F55E223C25C800BED62C /* DiscoverDeviceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverDeviceTableViewCell.swift; sourceTree = "<group>"; };
 		ED41F55F223C25C800BED62C /* DiscoverDeviceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscoverDeviceTableViewCell.xib; sourceTree = "<group>"; };
 		ED89667B22357E32005A2608 /* BLEDeviceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceService.swift; sourceTree = "<group>"; };
@@ -160,7 +160,6 @@
 		ED0731C02232E8D600A1380A /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				ED0731FF2232EC2000A1380A /* BLEService.swift */,
 				ED89667B22357E32005A2608 /* BLEDeviceService.swift */,
 				EDAA778A2236167400A869BB /* LocalStorage.swift */,
 			);
@@ -303,7 +302,7 @@
 		EDB7901B2236DFA900B57F43 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				ED41F559223B5A9100BED62C /* PeripheralInfo.swift */,
+				ED41F559223B5A9100BED62C /* Device.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -312,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				ED3031E1223CB24B00B49F78 /* BLEManager.swift */,
+				ED3031E3223CC17900B49F78 /* BLEDelegate.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -464,12 +464,12 @@
 				ED0731F42232E9E600A1380A /* Integer.swift in Sources */,
 				ED0731E12232E9E600A1380A /* UIVIew.swift in Sources */,
 				ED0731ED2232E9E600A1380A /* UIScreen.swift in Sources */,
-				ED0732002232EC2000A1380A /* BLEService.swift in Sources */,
 				EDAA778B2236167400A869BB /* LocalStorage.swift in Sources */,
 				ED0731EE2232E9E600A1380A /* Button.swift in Sources */,
 				ED0731AF2232E87D00A1380A /* AppDelegate.swift in Sources */,
 				ED0731DF2232E9E600A1380A /* Realm.swift in Sources */,
 				ED3031E2223CB24B00B49F78 /* BLEManager.swift in Sources */,
+				ED3031E4223CC17900B49F78 /* BLEDelegate.swift in Sources */,
 				ED0731F02232E9E600A1380A /* CAGradientLayer.swift in Sources */,
 				ED0731FC2232EA5D00A1380A /* DiscoverTableViewController.swift in Sources */,
 				ED0731EC2232E9E600A1380A /* UIView+Nib.swift in Sources */,
@@ -485,7 +485,7 @@
 				ED0731F22232E9E600A1380A /* UIColor+extension.swift in Sources */,
 				ED0731E62232E9E600A1380A /* NSMutableAttributedString.swift in Sources */,
 				ED0731FA2232EA1F00A1380A /* Constants.swift in Sources */,
-				ED41F55A223B5A9100BED62C /* PeripheralInfo.swift in Sources */,
+				ED41F55A223B5A9100BED62C /* Device.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

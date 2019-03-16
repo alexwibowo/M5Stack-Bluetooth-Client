@@ -11,13 +11,6 @@ import CoreBluetooth
 
 class HomeViewController: UIViewController {
     
-    fileprivate var deviceService: BLEDeviceService?
-    fileprivate var bleService: BLEService?
-    fileprivate let localStorage = LocalStorage()
-    fileprivate lazy var storedDevice = localStorage.getDevices()
-    
-    var device: CBPeripheral?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

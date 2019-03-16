@@ -41,7 +41,7 @@ class DiscoverTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let peripheralData = devices[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "discoverCell", for: indexPath) as! DiscoverDeviceTableViewCell
-        cell.configure(peripheralData: peripheralData)
+        cell.configure(withDevice: peripheralData)
         return cell
     }
     
@@ -51,7 +51,7 @@ class DiscoverTableViewController: UITableViewController {
     }
     
     func didDiscoverPeripherals(_ peripheralsData: [Device]) {
-        devices = peripheralsData.sorted(by: { $0.RSSI > $1.RSSI})
+        devices = peripheralsData.sorted(by: { $0.rssi > $1.rssi})
         tableView.reloadData()
     }
     
@@ -63,18 +63,18 @@ class DiscoverTableViewController: UITableViewController {
     
     func errorHandler(_ error: BLEServiceErrors) {
         switch error {
-        case .poweredOff(let message):
-            self.alert(title: "Error", msg: message)
-        case .resetting(let message):
-            self.alert(title: "Error", msg: message)
-        case .unauthorized(let message):
-            self.alert(title: "Error", msg: message)
-        case .unknown(let message):
-            self.alert(title: "Error", msg: message)
-        case .unsupported(let message):
-            self.alert(title: "Error", msg: message)
-        case .noDevices(let message):
-            self.alert(title: "Notice", msg: message)
+        case .poweredOff:
+            self.alert(title: "Error", msg: "Powered off")
+        case .resetting:
+            self.alert(title: "Error", msg: "resetting")
+        case .unauthorized:
+            self.alert(title: "Error", msg: "resetting")
+        case .unknown:
+            self.alert(title: "Error", msg: "resetting")
+        case .unsupported:
+            self.alert(title: "Error", msg: "resetting")
+        case .noDevices:
+            self.alert(title: "Notice", msg: "resetting")
         }
     }
 }

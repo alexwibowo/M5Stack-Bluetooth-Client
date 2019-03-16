@@ -13,8 +13,13 @@ enum DiscoveryState {
     case Searching
 }
 
-enum ConnectionState {
+@objc public enum ConnectionState: Int {
     case connecting
     case connected
     case disconnected
+}
+
+@objc public enum SearchState: Int {
+    case searching
+    case idle
 }

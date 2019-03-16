@@ -11,43 +11,46 @@ import SwiftDate
 
 class DiscoverViewModel: NSObject {
 
-    private let bleService = BLEService(autostart: true)
-    var devices: [Device] = []
-    fileprivate var discoveryState: DiscoveryState = .StandBy
+    private let bleManager = BLEManager.shared
     
+    var devices: [Device] = []
     var didDiscoverDevices: ((_ devices: [Device]) -> Void)?
     var connectedDevice: ((_ connectedDevice: Device) -> Void)?
     var errorHandler: ((_ error: BLEServiceErrors) -> Void)?
+    
     override init() {
         super.init()
-        bleService.delegate = self
+        bleManager.delegate = self
+        bleManager.startScan()
     }
     
     func connect(peripheral: CBPeripheral) {
-        bleService.connect(peripheral, options: nil)
     }
     
     func unload() {
-        bleService.stopScan()
-//        bleService.manager = nil
     }
 }
 
-extension DiscoverViewModel: BLEServiceDelegate {
+extension DiscoverViewModel: BLEDelegate {
     
     internal func didUpdateState(_ state: CBManagerState) {
         if state == .poweredOn {
-            bleService.startScan()
-            discoveryState = .Searching
+            bleManager.startScan()
         }
     }
     
-    func didDiscoverDevices(_ devices: [Device]) {
-        didDiscoverDevices?(devices)
+    func didDiscoverPeripheral(_ peripheral: CBPeripheral, advertisementData: [String : Any], RSSI: Int) {
+        let device = Device(peripheral: peripheral, advertisementData: advertisementData, rssi: RSSI)
+        if !devices.contains(device) {
+            devices.append(device)
+        }
+    }
+    
+    func didFinishDiscoverPeripheral() {
+        self.didDiscoverDevices?(devices)
     }
     
     internal func didConnectPeripheral(_ connectedPeripheral: CBPeripheral) {
-        discoveryState = .StandBy
         let peripheralData = devices.first { (peripheralData) -> Bool in
             if peripheralData.peripheral == connectedPeripheral {
                 return true
@@ -63,7 +66,7 @@ extension DiscoverViewModel: BLEServiceDelegate {
         // do nothing
     }
     
-    internal func handleErrors(_ error: BLEServiceErrors) {
+    internal func bleErrorHandler(_ error: BLEServiceErrors) {
         errorHandler?(error)
     }
 }

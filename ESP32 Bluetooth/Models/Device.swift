@@ -10,9 +10,9 @@ import CoreBluetooth
 
 struct Device: Equatable, Hashable {
     
-    let peripheral: CBPeripheral
-    let RSSI: Int
-    let advertisementData: [String : Any]
+    var peripheral: CBPeripheral
+    var advertisementData: [String : Any] = [:]
+    var rssi: Int = 0
     
     static func == (lhs: Device, rhs: Device) -> Bool {
         return lhs.peripheral.isEqual(rhs.peripheral)
