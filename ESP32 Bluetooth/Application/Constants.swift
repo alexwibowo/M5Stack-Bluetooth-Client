@@ -7,3 +7,14 @@
 //
 
 import Foundation
+
+enum DiscoveryState {
+    case StandBy
+    case Searching
+}
+
+enum ConnectionState {
+    case connecting
+    case connected
+    case disconnected
+}

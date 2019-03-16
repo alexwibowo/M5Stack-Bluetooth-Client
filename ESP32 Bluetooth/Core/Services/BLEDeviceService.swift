@@ -11,23 +11,23 @@ import CoreBluetooth
 
 class BLEDeviceService: NSObject, CBPeripheralDelegate {
     
-    var device: CBPeripheral!
+    var peripheral: CBPeripheral!
     var BLECharacteristic: [String] = []
     var mainCharacteristics: [CBCharacteristic]?
     var didUpdateValue: ((CBCharacteristic) -> Void)?
     
     init(_ device: CBPeripheral) {
         super.init()
-        self.device = device
-        self.device.delegate = self
+        self.peripheral = device
+        self.peripheral.delegate = self
     }
     
     func name() -> String {
-        return device.name ?? ""
+        return peripheral.name ?? ""
     }
     
     func isConnected() -> Bool {
-        return device.state == .connected ? true : false
+        return peripheral.state == .connected ? true : false
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
@@ -60,10 +60,10 @@ class BLEDeviceService: NSObject, CBPeripheralDelegate {
     }
     
     func writeData(characteristic: CBCharacteristic, data: Data) {
-        self.device.writeValue(data, for: characteristic, type: .withResponse)
+        self.peripheral.writeValue(data, for: characteristic, type: .withResponse)
     }
     
     func readData(characteristic: CBCharacteristic) {
-        self.device.readValue(for: characteristic)
+        self.peripheral.readValue(for: characteristic)
     }
 }

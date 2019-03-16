@@ -11,15 +11,23 @@ import CoreBluetooth
 
 class DiscoverTableViewController: UITableViewController {
     
-    let bleService = BLEService(autostart: false)
-    fileprivate var devices: [PeripheralData] = []
+    fileprivate let viewModel = DiscoverViewModel()
+    fileprivate var devices: [Device] = []
     
     var callback: ((CBPeripheral?) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(UINib(nibName: "DiscoverDeviceTableViewCell", bundle: nil), forCellReuseIdentifier: "discoverCell")
         tableView.withClearFooter()
-        bleService.delegate = self
+        
+        viewModel.didDiscoverDevices = didDiscoverPeripherals
+        viewModel.connectedDevice = connectedPeripheral
+        viewModel.errorHandler = errorHandler
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        viewModel.unload()
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -32,53 +40,28 @@ class DiscoverTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let peripheralData = devices[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "basicCell", for: indexPath)
-        cell.textLabel?.text = peripheralData.peripheral.name ?? "no name"
-        cell.detailTextLabel?.text = "\(peripheralData.RSSI)"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "discoverCell", for: indexPath) as! DiscoverDeviceTableViewCell
+        cell.configure(peripheralData: peripheralData)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let peripheral = devices[indexPath.row].peripheral
-        bleService.connect(peripheral, options: nil)
+        viewModel.connect(peripheral: peripheral)
     }
     
-}
-
-extension DiscoverTableViewController: BLEServiceDelegate {
-    
-    func didUpdateState(_ state: CBManagerState) {
-        if state == .poweredOn {
-            bleService.startScan()
-        }
+    func didDiscoverPeripherals(_ peripheralsData: [Device]) {
+        devices = peripheralsData.sorted(by: { $0.RSSI > $1.RSSI})
+        tableView.reloadData()
     }
     
-    func didDiscoverPeripheral(_ peripheral: CBPeripheral, advertisementData: [String : Any], RSSI: NSNumber) {
-        
-        // If the last update within one second, then ignore it
-        let peripheralData = PeripheralData(peripheral: peripheral, RSSI: RSSI, advertisementData: advertisementData)
-        if !self.devices.contains(peripheralData) {
-            self.devices.append(peripheralData)
-        } else {
-            guard let index = self.devices.firstIndex(of: peripheralData) else {
-                return
-            }
-            self.devices[index] = peripheralData
-        }
-        print("Bluetooth Manager --> didDiscoverPeripheral, RSSI:\(RSSI)")
-        self.tableView.reloadData()
-    }
-    
-    func didConnectPeripheral(_ connectedPeripheral: CBPeripheral) {
-        self.callback?(connectedPeripheral)
+    func connectedPeripheral(_ peripheralData: Device) {
+        self.callback?(peripheralData.peripheral)
         self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
     }
     
-    func didDisconnectPeripheral(_ peripheral: CBPeripheral) {
-        // do nothing
-    }
-    
-    func handleErrors(_ error: BLEServiceErrors) {
+    func errorHandler(_ error: BLEServiceErrors) {
         switch error {
         case .poweredOff(let message):
             self.alert(title: "Error", msg: message)

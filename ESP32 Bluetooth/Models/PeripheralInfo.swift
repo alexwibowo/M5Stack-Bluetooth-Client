@@ -8,13 +8,13 @@
 
 import CoreBluetooth
 
-struct PeripheralData: Equatable, Hashable {
+struct Device: Equatable, Hashable {
     
     let peripheral: CBPeripheral
-    let RSSI: NSNumber
+    let RSSI: Int
     let advertisementData: [String : Any]
     
-    static func == (lhs: PeripheralData, rhs: PeripheralData) -> Bool {
+    static func == (lhs: Device, rhs: Device) -> Bool {
         return lhs.peripheral.isEqual(rhs.peripheral)
     }
     

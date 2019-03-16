@@ -22,14 +22,14 @@ protocol BLEServiceDelegate: NSObjectProtocol {
     func handleErrors(_ error: BLEServiceErrors)
     func didConnectPeripheral(_ connectedPeripheral: CBPeripheral)
     func didUpdateState(_ state: CBManagerState)
-    func didDiscoverPeripheral(_ peripheral: CBPeripheral, advertisementData: [String : Any], RSSI: NSNumber)
+    func didDiscoverDevices(_ devices: [Device])
     func didDisconnectPeripheral(_ peripheral: CBPeripheral)
 }
 
 protocol BLEServiceProtocol: class {
     
     var manager: CBCentralManager? {get set}
-    var peripheral: [CBPeripheral] {get set}
+    var devices: [Device] {get set}
     var state: CBManagerState? {get set}
     var peripheralServices: [CBUUID]? {get set}
     var peripheralOptions: [String: Any]? {get set}
@@ -47,11 +47,11 @@ protocol BLEServiceProtocol: class {
 class BLEService: NSObject, BLEServiceProtocol {
     
     internal var manager: CBCentralManager?
-    internal var peripheral: [CBPeripheral] = []
+    internal var devices: [Device] = []
     internal var peripheralServices: [CBUUID]?
     internal var peripheralOptions: [String: Any]?
     weak var delegate: BLEServiceDelegate?
-    var autostart: Bool = false
+    var autostart: Bool = true
     internal lazy var state: CBManagerState? = {
         guard manager != nil else {
             return nil
@@ -80,17 +80,16 @@ class BLEService: NSObject, BLEServiceProtocol {
     
     func startScan() {
         self.startScan(services: nil, options: nil)
+        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.stopScan), userInfo: nil, repeats: false)
     }
     
     func startScan(services: [CBUUID]?, options: [String: Any]?) {
         manager?.scanForPeripherals(withServices: services, options: options)
     }
     
-    func stopScan() {
+    @objc func stopScan() {
         manager?.stopScan()
-        if peripheral.count == 0 {
-            delegate?.handleErrors(.noDevices(message: "No devices found"))
-        }
+        delegate?.didDiscoverDevices(devices)
     }
     
     func connect(_ peripheral: CBPeripheral, options: [String : Any]?) {
@@ -131,12 +130,17 @@ extension BLEService: CBCentralManagerDelegate {
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        delegate?.didDiscoverPeripheral(peripheral, advertisementData: advertisementData, RSSI: RSSI)
+        guard RSSI.intValue != 127 else {
+            return
+        }
+        let peripheralData = Device(peripheral: peripheral, RSSI: RSSI.intValue, advertisementData: advertisementData)
+        if(!devices.contains(peripheralData)) {
+            devices.append(peripheralData)
+        }
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         manager?.stopScan()
-        peripheral.discoverServices(nil)
         delegate?.didConnectPeripheral(peripheral)
     }
     
