@@ -114,6 +114,7 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         centralManager?.stopScan()
         peripheral.delegate = self
         connectedPeripheral = peripheral
+        peripheral.discoverServices(nil)
         connectionState = .connected
         delegate?.didConnectPeripheral(peripheral)
     }

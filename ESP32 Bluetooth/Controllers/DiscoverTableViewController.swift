@@ -11,7 +11,7 @@ import CoreBluetooth
 
 class DiscoverTableViewController: UITableViewController {
     
-    fileprivate let viewModel = DiscoverViewModel()
+    fileprivate var viewModel: DiscoverViewModel? = DiscoverViewModel()
     fileprivate var devices: [Device] = []
     
     var callback: ((CBPeripheral?) -> Void)?
@@ -21,13 +21,14 @@ class DiscoverTableViewController: UITableViewController {
         tableView.register(UINib(nibName: "DiscoverDeviceTableViewCell", bundle: nil), forCellReuseIdentifier: "discoverCell")
         tableView.withClearFooter()
         
-        viewModel.didDiscoverDevices = didDiscoverPeripherals
-        viewModel.connectedDevice = connectedPeripheral
-        viewModel.errorHandler = errorHandler
+        viewModel?.didDiscoverDevices = didDiscoverPeripherals
+        viewModel?.connectedDevice = connectedPeripheral
+        viewModel?.errorHandler = errorHandler
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        viewModel.unload()
+        viewModel = nil
+        
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -47,7 +48,7 @@ class DiscoverTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let peripheral = devices[indexPath.row].peripheral
-        viewModel.connect(peripheral: peripheral)
+        viewModel?.connect(peripheral: peripheral)
     }
     
     func didDiscoverPeripherals(_ peripheralsData: [Device]) {

@@ -18,6 +18,8 @@ class DiscoverViewModel: NSObject {
     var connectedDevice: ((_ connectedDevice: Device) -> Void)?
     var errorHandler: ((_ error: BLEServiceErrors) -> Void)?
     
+    var refreshTimer: Timer!
+    
     override init() {
         super.init()
         bleManager.delegate = self
@@ -25,9 +27,16 @@ class DiscoverViewModel: NSObject {
     }
     
     func connect(peripheral: CBPeripheral) {
+        bleManager.connect(peripheral, options: nil)
+    }
+    
+    @objc private func refreshDeviceList() {
+        devices.removeAll()
+        bleManager.startScan()
     }
     
     func unload() {
+        refreshTimer.invalidate()
     }
 }
 
@@ -48,6 +57,7 @@ extension DiscoverViewModel: BLEDelegate {
     
     func didFinishDiscoverPeripheral() {
         self.didDiscoverDevices?(devices)
+        refreshTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(refreshDeviceList), userInfo: nil, repeats: false)
     }
     
     internal func didConnectPeripheral(_ connectedPeripheral: CBPeripheral) {
