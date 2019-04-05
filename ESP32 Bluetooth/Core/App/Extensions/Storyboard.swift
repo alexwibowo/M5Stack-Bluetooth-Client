@@ -20,8 +20,8 @@ extension UIStoryboard {
     /// Get HomeViewController
     ///
     /// - Returns: return `HomeViewController` object
-    class func homeViewController() -> HomeViewController {
-        return mainStoryboard().instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+    class func HomeTableViewController() -> HomeTableViewController {
+        return mainStoryboard().instantiateViewController(withIdentifier: "HomeTableViewController") as! HomeTableViewController
     }
     
     /// Get DiscoverTableViewController
@@ -36,6 +36,10 @@ extension UIStoryboard {
     /// - Returns: return `DiscoverTableViewController` object
     class func deviceDetailsViewController() -> DeviceDetailsTableViewController {
         return mainStoryboard().instantiateViewController(withIdentifier: "DeviceDetailsTableViewController") as! DeviceDetailsTableViewController
+    }
+    
+    class func writeDataViewController() -> WriteDataViewController {
+        return mainStoryboard().instantiateViewController(withIdentifier: "WriteDataViewController") as! WriteDataViewController
     }
     
 }

@@ -10,9 +10,10 @@ import CoreBluetooth
 import SwiftDate
 
 class DiscoverViewModel: NSObject {
-
-    private let bleManager = BLEManager.shared
     
+    let services: [CBUUID] = [CBUUID(string: DeviceNames.TemperatureServiceUUID)]
+    
+    private var bleManager = BLEManager.shared
     var devices: [Device] = []
     var didDiscoverDevices: ((_ devices: [Device]) -> Void)?
     var connectedDevice: ((_ connectedDevice: Device) -> Void)?

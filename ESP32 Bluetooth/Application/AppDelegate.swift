@@ -15,8 +15,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        BLEManager.Events.registerDisconnection(target: self, selector: #selector(self.displayAlert))
+        
+        let theme = DefaultTheme()
+        theme.apply(for: UIApplication.shared)
         return true
+    }
+    
+    @objc func displayAlert() {
+        self.window?.rootViewController?.alert(title: "Disconnected", msg: "Device disconnected")
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

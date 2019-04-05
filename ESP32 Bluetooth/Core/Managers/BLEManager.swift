@@ -6,6 +6,7 @@
 //  Copyright © 2019 Mac Ward. All rights reserved.
 //
 
+import UIKit
 import CoreBluetooth
 
 class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
@@ -21,7 +22,7 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     }
     
     private var searchState: SearchState = .idle
-    
+    private(set) var services: [CBService]?
     weak var delegate: BLEDelegate?
     
     private var timeoutMonitor : Timer?
@@ -37,7 +38,25 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     private override init() {
         super.init()
+        internalInit()
+    }
+    
+    private func internalInit() {
         centralManager = CBCentralManager(delegate: self, queue: nil)
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.appDidResume),
+            name: UIApplication.didBecomeActiveNotification,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.appDidBackground),
+            name: UIApplication.didEnterBackgroundNotification,
+            object: nil
+        )
     }
     
     func startScan() {
@@ -46,6 +65,7 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         }
         searchState = .searching
         centralManager?.scanForPeripherals(withServices: nil, options: nil)
+        
         Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.stopScan), userInfo: nil, repeats: false)
     }
     
@@ -72,9 +92,32 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         delegate?.didDisconnectPeripheral?(peripheral)
     }
     
+    func disconnectCurrentPeripheral() {
+        if let peripheral = connectedPeripheral {
+            centralManager?.cancelPeripheralConnection(peripheral)
+            delegate?.didDisconnectPeripheral?(peripheral)
+        }
+    }
+    
     @objc func connectTimeout(_ timer : Timer) {
         if connectionState == .connecting {
             connectionState = .disconnected
+            self.disconnectCurrentPeripheral()
+            timeoutMonitor = nil
+            delegate?.bleErrorHandler?(.timeOut)
+        }
+    }
+    
+    func discoverCharacteristics() {
+        if connectedPeripheral == nil {
+            return
+        }
+        let services = connectedPeripheral!.services
+        if services == nil || services!.count < 1 { // Validate service array
+            return;
+        }
+        for service in services! {
+            connectedPeripheral!.discoverCharacteristics(nil, for: service)
         }
     }
     
@@ -86,19 +129,19 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                 startScan()
             }
         case .poweredOff:
-            delegate?.bleErrorHandler(.poweredOff)
+            delegate?.bleErrorHandler?(.poweredOff)
         case .resetting:
-            delegate?.bleErrorHandler(.poweredOff)
+            delegate?.bleErrorHandler?(.poweredOff)
         case .unauthorized:
-            delegate?.bleErrorHandler(.poweredOff)
+            delegate?.bleErrorHandler?(.poweredOff)
         case .unknown:
-            delegate?.bleErrorHandler(.poweredOff)
+            delegate?.bleErrorHandler?(.poweredOff)
         case .unsupported:
-            delegate?.bleErrorHandler(.poweredOff)
+            delegate?.bleErrorHandler?(.poweredOff)
         }
         
         if let state = self.state {
-            delegate?.didUpdateState(state)
+            delegate?.didUpdateState?(state)
         }
         
     }
@@ -107,7 +150,12 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         guard RSSI.intValue != 127 else {
             return
         }
-        delegate?.didDiscoverPeripheral(peripheral, advertisementData: advertisementData, RSSI: RSSI.intValue)
+        
+        if CBUUID(nsuuid: peripheral.identifier) == CBUUID(string: "A28C88F8-B4B3-C499-AFB6-216AABCDC15B") {
+            print(advertisementData)
+        }
+        let distance = calculateDistance(rssi: RSSI.intValue, txPower: 1)
+        delegate?.didDiscoverPeripheral?(peripheral, advertisementData: advertisementData, RSSI: RSSI.intValue)
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -116,33 +164,39 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         connectedPeripheral = peripheral
         peripheral.discoverServices(nil)
         connectionState = .connected
-        delegate?.didConnectPeripheral(peripheral)
+        delegate?.didConnectPeripheral?(peripheral)
+        NotificationCenter.default.post(name: Notification.Name.PeripheralConnected, object: nil)
     }
     
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         connectionState = .disconnected
         delegate?.didDisconnectPeripheral?(peripheral)
+        NotificationCenter.default.post(name: Notification.Name.PeripheralDisconnected, object: nil)
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        delegate?.bleErrorHandler(.unknown)
+        delegate?.bleErrorHandler?(.unknown)
     }
-
     
     // MARK: Peropheral Delegate
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        connectedPeripheral = peripheral
         
         if error != nil {
-            print("Bluetooth Manager --> Discover Services Error, error:\(error?.localizedDescription ?? "")")
-            return ;
+            delegate?.bleErrorHandler?(.unknown)
+            return
+        }
+        
+        connectedPeripheral = peripheral
+        services = peripheral.services
+        self.discoverCharacteristics()
+        for service in services! {
+            connectedPeripheral!.discoverCharacteristics(nil, for: service)
         }
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        print("Bluetooth Manager --> didDiscoverCharacteristicsForService")
+
         if error != nil {
-            print("Bluetooth Manager --> Fail to discover characteristics! Error: \(error?.localizedDescription ?? "")")
             delegate?.didFailToDiscoverCharacteritics?(error!)
             return
         }
@@ -150,13 +204,73 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverDescriptorsFor characteristic: CBCharacteristic, error: Error?) {
-        print("Bluetooth Manager --> didDiscoverDescriptorsForCharacteristic")
         if error != nil {
-            print("Bluetooth Manager --> Fail to discover descriptor for characteristic Error:\(error?.localizedDescription ?? "")")
             delegate?.didFailToDiscoverDescriptors?(error!)
             return
         }
         delegate?.didDiscoverDescriptors?(characteristic)
     }
     
+    func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
+        delegate?.deviceDistance?(peripheral, distance: calculateDistance(rssi: RSSI.intValue, txPower: 1))
+    }
+    
+    func calculateDistance(rssi:Int,txPower:Int) -> Double {
+        /*
+         * RSSI = TxPower - 10 * n * lg(d)
+         * n = 2 (in free space)
+         *
+         * d = 10 ^ ((TxPower - RSSI) / (10 * n))
+         */
+        let result = pow(10.0, (txPower - rssi) / (10 * 4))
+        return NSDecimalNumber(decimal: result).doubleValue/10.0
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        delegate?.didReadValueForCharacteristic?(characteristic)
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+        delegate?.didWriteValueForCharacteristic?(characteristic)
+    }
+    
+    func write(_ data: Data, for characteristic: CBCharacteristic ) {
+        connectedPeripheral?.writeValue(data, for: characteristic, type: .withResponse)
+    }
 }
+
+extension BLEManager {
+    
+    @objc func appDidResume() {
+        print(#function)
+    }
+    
+    @objc func appDidBackground() {
+        print(#function)
+    }
+    
+    struct Events {
+        static func registerConnection(target: Any, selector: Selector) {
+            NotificationCenter.default.addObserver(
+                target,
+                selector: selector,
+                name: NSNotification.Name.PeripheralConnected,
+                object: nil
+            )
+        }
+        
+        static func registerDisconnection(target: Any, selector: Selector) {
+            NotificationCenter.default.addObserver(
+                target,
+                selector: selector,
+                name: NSNotification.Name.PeripheralDisconnected,
+                object: nil
+            )
+        }
+    }
+    
+    class func NotifyDisconnection() {
+        
+    }
+}
+

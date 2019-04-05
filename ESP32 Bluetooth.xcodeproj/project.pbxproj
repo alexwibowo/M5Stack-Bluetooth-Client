@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4D4D2E14F4AF66BF40AE8AE3 /* Pods_ESP32_Bluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7B6E4BCEC14C075BEBD1F1 /* Pods_ESP32_Bluetooth.framework */; };
+		ED04ACAC2243285500BECF3D /* DeviceInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED04ACAB2243285500BECF3D /* DeviceInfoViewModel.swift */; };
 		ED0731AF2232E87D00A1380A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0731AE2232E87D00A1380A /* AppDelegate.swift */; };
-		ED0731B12232E87D00A1380A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0731B02232E87D00A1380A /* HomeViewController.swift */; };
 		ED0731B42232E87D00A1380A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED0731B22232E87D00A1380A /* Main.storyboard */; };
 		ED0731B62232E87F00A1380A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED0731B52232E87F00A1380A /* Assets.xcassets */; };
 		ED0731B92232E87F00A1380A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED0731B72232E87F00A1380A /* LaunchScreen.storyboard */; };
@@ -31,7 +31,6 @@
 		ED0731EF2232E9E600A1380A /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0731D62232E9E600A1380A /* UINavigationController.swift */; };
 		ED0731F02232E9E600A1380A /* CAGradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0731D72232E9E600A1380A /* CAGradientLayer.swift */; };
 		ED0731F12232E9E600A1380A /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0731D92232E9E600A1380A /* Date.swift */; };
-		ED0731F22232E9E600A1380A /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0731DA2232E9E600A1380A /* UIColor+extension.swift */; };
 		ED0731F32232E9E600A1380A /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0731DB2232E9E600A1380A /* Data.swift */; };
 		ED0731F42232E9E600A1380A /* Integer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0731DC2232E9E600A1380A /* Integer.swift */; };
 		ED0731F52232E9E600A1380A /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0731DD2232E9E600A1380A /* Dictionary.swift */; };
@@ -40,24 +39,34 @@
 		ED0731FC2232EA5D00A1380A /* DiscoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0731FB2232EA5D00A1380A /* DiscoverTableViewController.swift */; };
 		ED0731FE2232EA8300A1380A /* DiscoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0731FD2232EA8300A1380A /* DiscoverViewModel.swift */; };
 		ED0732022232EC4600A1380A /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED0732012232EC4600A1380A /* CoreBluetooth.framework */; };
+		ED268F9C223F413500575B1D /* CBCharacteristics.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED268F9B223F413500575B1D /* CBCharacteristics.swift */; };
+		ED268F9E223F418D00575B1D /* CBUUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED268F9D223F418D00575B1D /* CBUUID.swift */; };
 		ED3031E2223CB24B00B49F78 /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3031E1223CB24B00B49F78 /* BLEManager.swift */; };
 		ED3031E4223CC17900B49F78 /* BLEDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3031E3223CC17900B49F78 /* BLEDelegate.swift */; };
 		ED41F558223AE56900BED62C /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED41F557223AE56900BED62C /* Storyboard.swift */; };
 		ED41F55A223B5A9100BED62C /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED41F559223B5A9100BED62C /* Device.swift */; };
 		ED41F560223C25C800BED62C /* DiscoverDeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED41F55E223C25C800BED62C /* DiscoverDeviceTableViewCell.swift */; };
 		ED41F561223C25C800BED62C /* DiscoverDeviceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED41F55F223C25C800BED62C /* DiscoverDeviceTableViewCell.xib */; };
+		ED810D202245D72000F0C428 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED810D1F2245D72000F0C428 /* HomeTableViewController.swift */; };
+		ED810D232245D9B100F0C428 /* DeviceInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED810D222245D9B100F0C428 /* DeviceInfoHeaderView.swift */; };
+		ED810D252245DAA500F0C428 /* DeviceInfoHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED810D242245DAA500F0C428 /* DeviceInfoHeaderView.xib */; };
+		ED810D272245EF0E00F0C428 /* WriteDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED810D262245EF0E00F0C428 /* WriteDataViewController.swift */; };
 		ED89667C22357E32005A2608 /* BLEDeviceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED89667B22357E32005A2608 /* BLEDeviceService.swift */; };
 		EDAA778B2236167400A869BB /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAA778A2236167400A869BB /* LocalStorage.swift */; };
 		EDB790252236F8C500B57F43 /* DeviceDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB790242236F8C500B57F43 /* DeviceDetailsTableViewController.swift */; };
+		EDD93DDB223DC8B7006F2777 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD93DDA223DC8B7006F2777 /* Notifications.swift */; };
+		EDD93DDE223DE367006F2777 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD93DDD223DE367006F2777 /* Theme.swift */; };
+		EDD93DE1223DF560006F2777 /* DefaultTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD93DE0223DF560006F2777 /* DefaultTheme.swift */; };
+		EDD93DE3223E02BF006F2777 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD93DE2223E02BF006F2777 /* UIColor+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2D5061D74F784C0348590A5E /* Pods-ESP32 Bluetooth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESP32 Bluetooth.release.xcconfig"; path = "Pods/Target Support Files/Pods-ESP32 Bluetooth/Pods-ESP32 Bluetooth.release.xcconfig"; sourceTree = "<group>"; };
 		5E7B6E4BCEC14C075BEBD1F1 /* Pods_ESP32_Bluetooth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ESP32_Bluetooth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC68230FB91B4EE9F570E14D /* Pods-ESP32 Bluetooth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESP32 Bluetooth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ESP32 Bluetooth/Pods-ESP32 Bluetooth.debug.xcconfig"; sourceTree = "<group>"; };
+		ED04ACAB2243285500BECF3D /* DeviceInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoViewModel.swift; sourceTree = "<group>"; };
 		ED0731AB2232E87D00A1380A /* ESP32 Bluetooth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ESP32 Bluetooth.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED0731AE2232E87D00A1380A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		ED0731B02232E87D00A1380A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		ED0731B32232E87D00A1380A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ED0731B52232E87F00A1380A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED0731B82232E87F00A1380A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -80,7 +89,6 @@
 		ED0731D62232E9E600A1380A /* UINavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		ED0731D72232E9E600A1380A /* CAGradientLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAGradientLayer.swift; sourceTree = "<group>"; };
 		ED0731D92232E9E600A1380A /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
-		ED0731DA2232E9E600A1380A /* UIColor+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		ED0731DB2232E9E600A1380A /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		ED0731DC2232E9E600A1380A /* Integer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Integer.swift; sourceTree = "<group>"; };
 		ED0731DD2232E9E600A1380A /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
@@ -89,15 +97,25 @@
 		ED0731FB2232EA5D00A1380A /* DiscoverTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewController.swift; sourceTree = "<group>"; };
 		ED0731FD2232EA8300A1380A /* DiscoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewModel.swift; sourceTree = "<group>"; };
 		ED0732012232EC4600A1380A /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		ED268F9B223F413500575B1D /* CBCharacteristics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBCharacteristics.swift; sourceTree = "<group>"; };
+		ED268F9D223F418D00575B1D /* CBUUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBUUID.swift; sourceTree = "<group>"; };
 		ED3031E1223CB24B00B49F78 /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
 		ED3031E3223CC17900B49F78 /* BLEDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDelegate.swift; sourceTree = "<group>"; };
 		ED41F557223AE56900BED62C /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		ED41F559223B5A9100BED62C /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		ED41F55E223C25C800BED62C /* DiscoverDeviceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverDeviceTableViewCell.swift; sourceTree = "<group>"; };
 		ED41F55F223C25C800BED62C /* DiscoverDeviceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscoverDeviceTableViewCell.xib; sourceTree = "<group>"; };
+		ED810D1F2245D72000F0C428 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
+		ED810D222245D9B100F0C428 /* DeviceInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoHeaderView.swift; sourceTree = "<group>"; };
+		ED810D242245DAA500F0C428 /* DeviceInfoHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeviceInfoHeaderView.xib; sourceTree = "<group>"; };
+		ED810D262245EF0E00F0C428 /* WriteDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDataViewController.swift; sourceTree = "<group>"; };
 		ED89667B22357E32005A2608 /* BLEDeviceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceService.swift; sourceTree = "<group>"; };
 		EDAA778A2236167400A869BB /* LocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
 		EDB790242236F8C500B57F43 /* DeviceDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailsTableViewController.swift; sourceTree = "<group>"; };
+		EDD93DDA223DC8B7006F2777 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		EDD93DDD223DE367006F2777 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		EDD93DE0223DF560006F2777 /* DefaultTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTheme.swift; sourceTree = "<group>"; };
+		EDD93DE2223E02BF006F2777 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,9 +187,10 @@
 		ED0731C12232E8E000A1380A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				ED0731B02232E87D00A1380A /* HomeViewController.swift */,
+				ED810D1F2245D72000F0C428 /* HomeTableViewController.swift */,
 				ED0731FB2232EA5D00A1380A /* DiscoverTableViewController.swift */,
 				EDB790242236F8C500B57F43 /* DeviceDetailsTableViewController.swift */,
+				ED810D262245EF0E00F0C428 /* WriteDataViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -180,6 +199,8 @@
 			isa = PBXGroup;
 			children = (
 				ED41F555223AE53300BED62C /* App */,
+				EDD93DDF223DF549006F2777 /* Themes */,
+				EDD93DDC223DE355006F2777 /* Protocols */,
 				EDB7901E2236F75100B57F43 /* Managers */,
 				ED0731C02232E8D600A1380A /* Services */,
 				ED0731C32232E9E600A1380A /* Extensions */,
@@ -232,7 +253,6 @@
 			isa = PBXGroup;
 			children = (
 				ED0731D92232E9E600A1380A /* Date.swift */,
-				ED0731DA2232E9E600A1380A /* UIColor+extension.swift */,
 				ED0731DB2232E9E600A1380A /* Data.swift */,
 				ED0731DC2232E9E600A1380A /* Integer.swift */,
 				ED0731DD2232E9E600A1380A /* Dictionary.swift */,
@@ -245,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				ED0731FD2232EA8300A1380A /* DiscoverViewModel.swift */,
+				ED04ACAB2243285500BECF3D /* DeviceInfoViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -254,6 +275,7 @@
 			children = (
 				ED0731AE2232E87D00A1380A /* AppDelegate.swift */,
 				ED0731F92232EA1F00A1380A /* Constants.swift */,
+				EDD93DDA223DC8B7006F2777 /* Notifications.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -270,6 +292,9 @@
 			isa = PBXGroup;
 			children = (
 				ED41F557223AE56900BED62C /* Storyboard.swift */,
+				EDD93DE2223E02BF006F2777 /* UIColor+Extension.swift */,
+				ED268F9B223F413500575B1D /* CBCharacteristics.swift */,
+				ED268F9D223F418D00575B1D /* CBUUID.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -285,6 +310,7 @@
 		ED41F55C223C258C00BED62C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				ED810D212245D95B00F0C428 /* Home */,
 				ED41F55D223C259100BED62C /* Discover */,
 			);
 			path = Views;
@@ -297,6 +323,15 @@
 				ED41F55F223C25C800BED62C /* DiscoverDeviceTableViewCell.xib */,
 			);
 			path = Discover;
+			sourceTree = "<group>";
+		};
+		ED810D212245D95B00F0C428 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				ED810D222245D9B100F0C428 /* DeviceInfoHeaderView.swift */,
+				ED810D242245DAA500F0C428 /* DeviceInfoHeaderView.xib */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		EDB7901B2236DFA900B57F43 /* Models */ = {
@@ -314,6 +349,22 @@
 				ED3031E3223CC17900B49F78 /* BLEDelegate.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		EDD93DDC223DE355006F2777 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		EDD93DDF223DF549006F2777 /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				EDD93DE0223DF560006F2777 /* DefaultTheme.swift */,
+				EDD93DDD223DE367006F2777 /* Theme.swift */,
+			);
+			path = Themes;
 			sourceTree = "<group>";
 		};
 		F3234C6E4E62A38DD269A3ED /* Frameworks */ = {
@@ -385,6 +436,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED810D252245DAA500F0C428 /* DeviceInfoHeaderView.xib in Resources */,
 				ED0731B92232E87F00A1380A /* LaunchScreen.storyboard in Resources */,
 				ED0731B62232E87F00A1380A /* Assets.xcassets in Resources */,
 				ED41F561223C25C800BED62C /* DiscoverDeviceTableViewCell.xib in Resources */,
@@ -451,24 +503,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED41F560223C25C800BED62C /* DiscoverDeviceTableViewCell.swift in Sources */,
-				ED0731B12232E87D00A1380A /* HomeViewController.swift in Sources */,
 				ED89667C22357E32005A2608 /* BLEDeviceService.swift in Sources */,
 				ED0731FE2232EA8300A1380A /* DiscoverViewModel.swift in Sources */,
+				ED810D202245D72000F0C428 /* HomeTableViewController.swift in Sources */,
 				ED0731F62232E9E600A1380A /* Bundle.swift in Sources */,
+				EDD93DDB223DC8B7006F2777 /* Notifications.swift in Sources */,
+				ED268F9E223F418D00575B1D /* CBUUID.swift in Sources */,
 				ED0731EB2232E9E600A1380A /* UIImageView.swift in Sources */,
+				ED810D272245EF0E00F0C428 /* WriteDataViewController.swift in Sources */,
 				ED0731E32232E9E600A1380A /* UIColor.swift in Sources */,
 				ED0731E02232E9E600A1380A /* CALayer.swift in Sources */,
 				ED0731EF2232E9E600A1380A /* UINavigationController.swift in Sources */,
 				ED0731E42232E9E600A1380A /* ViewController+Accessibility.swift in Sources */,
 				EDB790252236F8C500B57F43 /* DeviceDetailsTableViewController.swift in Sources */,
 				ED0731F42232E9E600A1380A /* Integer.swift in Sources */,
+				EDD93DDE223DE367006F2777 /* Theme.swift in Sources */,
 				ED0731E12232E9E600A1380A /* UIVIew.swift in Sources */,
 				ED0731ED2232E9E600A1380A /* UIScreen.swift in Sources */,
 				EDAA778B2236167400A869BB /* LocalStorage.swift in Sources */,
+				ED810D232245D9B100F0C428 /* DeviceInfoHeaderView.swift in Sources */,
+				ED04ACAC2243285500BECF3D /* DeviceInfoViewModel.swift in Sources */,
 				ED0731EE2232E9E600A1380A /* Button.swift in Sources */,
 				ED0731AF2232E87D00A1380A /* AppDelegate.swift in Sources */,
+				ED268F9C223F413500575B1D /* CBCharacteristics.swift in Sources */,
 				ED0731DF2232E9E600A1380A /* Realm.swift in Sources */,
 				ED3031E2223CB24B00B49F78 /* BLEManager.swift in Sources */,
+				EDD93DE1223DF560006F2777 /* DefaultTheme.swift in Sources */,
 				ED3031E4223CC17900B49F78 /* BLEDelegate.swift in Sources */,
 				ED0731F02232E9E600A1380A /* CAGradientLayer.swift in Sources */,
 				ED0731FC2232EA5D00A1380A /* DiscoverTableViewController.swift in Sources */,
@@ -476,13 +536,13 @@
 				ED0731F32232E9E600A1380A /* Data.swift in Sources */,
 				ED0731EA2232E9E600A1380A /* UIScrollView+Extension.swift in Sources */,
 				ED0731E92232E9E600A1380A /* RadioButton.swift in Sources */,
+				EDD93DE3223E02BF006F2777 /* UIColor+Extension.swift in Sources */,
 				ED0731E82232E9E600A1380A /* UIDevice.swift in Sources */,
 				ED0731F12232E9E600A1380A /* Date.swift in Sources */,
 				ED0731E72232E9E600A1380A /* UITableView.swift in Sources */,
 				ED0731E52232E9E600A1380A /* UIViewController+Alerts.swift in Sources */,
 				ED0731F52232E9E600A1380A /* Dictionary.swift in Sources */,
 				ED41F558223AE56900BED62C /* Storyboard.swift in Sources */,
-				ED0731F22232E9E600A1380A /* UIColor+extension.swift in Sources */,
 				ED0731E62232E9E600A1380A /* NSMutableAttributedString.swift in Sources */,
 				ED0731FA2232EA1F00A1380A /* Constants.swift in Sources */,
 				ED41F55A223B5A9100BED62C /* Device.swift in Sources */,

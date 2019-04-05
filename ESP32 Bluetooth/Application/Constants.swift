@@ -23,3 +23,8 @@ enum DiscoveryState {
     case searching
     case idle
 }
+
+public enum DeviceEvents {
+    case connected
+    case disconnected
+}

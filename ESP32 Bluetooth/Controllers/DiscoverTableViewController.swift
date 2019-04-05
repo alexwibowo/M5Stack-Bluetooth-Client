@@ -28,7 +28,6 @@ class DiscoverTableViewController: UITableViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         viewModel = nil
-        
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -65,17 +64,19 @@ class DiscoverTableViewController: UITableViewController {
     func errorHandler(_ error: BLEServiceErrors) {
         switch error {
         case .poweredOff:
-            self.alert(title: "Error", msg: "Powered off")
+            self.alert(title: "poweredOff", msg: "Powered off")
         case .resetting:
-            self.alert(title: "Error", msg: "resetting")
+            self.alert(title: "resetting", msg: "resetting")
         case .unauthorized:
-            self.alert(title: "Error", msg: "resetting")
+            self.alert(title: "unauthorized", msg: "resetting")
         case .unknown:
-            self.alert(title: "Error", msg: "resetting")
+            self.alert(title: "unknown", msg: "resetting")
         case .unsupported:
-            self.alert(title: "Error", msg: "resetting")
+            self.alert(title: "Unsupported", msg: "resetting")
         case .noDevices:
-            self.alert(title: "Notice", msg: "resetting")
+            self.alert(title: "No devices", msg: "resetting")
+        case .timeOut:
+            self.alert(title: "Time out", msg: "resetting")
         }
     }
 }

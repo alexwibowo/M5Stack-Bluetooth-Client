@@ -15,14 +15,15 @@ import CoreBluetooth
     case unknown
     case unsupported
     case noDevices
+    case timeOut
 }
 
 @objc protocol BLEDelegate: NSObjectProtocol {
     
     // Bluetooth manager delegates
-    @objc func didUpdateState(_ state: CBManagerState)
-    @objc func didConnectPeripheral(_ connectedPeripheral: CBPeripheral)
-    @objc func didDiscoverPeripheral(_ peripheral: CBPeripheral, advertisementData: [String : Any], RSSI: Int)
+    @objc optional func didUpdateState(_ state: CBManagerState)
+    @objc optional func didConnectPeripheral(_ connectedPeripheral: CBPeripheral)
+    @objc optional func didDiscoverPeripheral(_ peripheral: CBPeripheral, advertisementData: [String : Any], RSSI: Int)
     @objc optional func didFinishDiscoverPeripheral()
     @objc optional func didDisconnectPeripheral(_ peripheral: CBPeripheral)
     
@@ -34,11 +35,14 @@ import CoreBluetooth
     @objc optional func didFailToDiscoverDescriptors(_ error: Error)
     
     @objc optional func didReadValueForCharacteristic(_ characteristic: CBCharacteristic)
+    @objc optional func didWriteValueForCharacteristic(_ characteristic: CBCharacteristic)
     @objc optional func didFailToReadValueForCharacteristic(_ error: Error)
     
+    // aditional methods
+    @objc optional func deviceDistance(_ peripheral: CBPeripheral, distance: Double)
     // app connection state delegates
     @objc optional func didUpdateConnectionState(_ state: ConnectionState)
     
     // error handling related delegates
-    @objc func bleErrorHandler(_ error: BLEServiceErrors)
+    @objc optional func bleErrorHandler(_ error: BLEServiceErrors)
 }
